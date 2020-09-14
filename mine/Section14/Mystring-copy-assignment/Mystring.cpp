@@ -11,7 +11,7 @@ Mystring::Mystring()
 
 // Overloaded constructor
 Mystring::Mystring(const char *s)
-        str{nullptr}{
+        :str{nullptr}{
           if(s == nullptr){
             str = new char[1];
             *str = '\0';
