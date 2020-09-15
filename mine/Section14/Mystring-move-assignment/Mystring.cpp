@@ -20,3 +20,39 @@ Mystring::Mystring(const char *s)
             std::strcpy(str, s);
           }
         }
+
+// Copy constructor
+Mystring::Mystring(const Mystring &source)
+        : str{nullptr}{
+          str = new char[std::strlen(source.str) + 1];
+          std::strcpy(str, source.str);
+          std::cout << "Copy constructor used" << std::endl;
+        }
+
+// Move constructor
+Mystring::Mystring(Mystring &&source)
+        str{source.str}{
+          source.str = nullptr;
+          std::cout << "Move constructor used" << std::endl;
+         }
+
+// Destructor
+Mystring::~Mystring{
+  if(str == nullptr){
+    std::cout << "Calling destructor for Mystring : nullptr" << std::endl;
+  }else{
+    std::cout << "Calling destructor for Mystring : " << str << std::endl;
+  }
+  delete [] str;
+}
+
+// Copy assignment
+Mystring &operator=(const Mystring &rhs){
+  if (this == rhs){
+    return *this;
+  }
+  delete [] str;
+  str = new char[std::strlen(rhs.str) + 1];
+  str = Mystring{rhs}; //original
+  return *this;
+}
