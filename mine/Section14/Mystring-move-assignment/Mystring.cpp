@@ -3,7 +3,7 @@
 #include "Mystring.h"
 
 //No-args constructor
-Mysting::Mystring()
+Mystring::Mystring()
       :str{nullptr}{
         str = new char[1];
         *str = '\0';
@@ -31,13 +31,13 @@ Mystring::Mystring(const Mystring &source)
 
 // Move constructor
 Mystring::Mystring(Mystring &&source)
-        str{source.str}{
+        : str{source.str}{
           source.str = nullptr;
           std::cout << "Move constructor used" << std::endl;
          }
 
 // Destructor
-Mystring::~Mystring{
+Mystring::~Mystring(){
   if(str == nullptr){
     std::cout << "Calling destructor for Mystring : nullptr" << std::endl;
   }else{
@@ -47,12 +47,33 @@ Mystring::~Mystring{
 }
 
 // Copy assignment
-Mystring &operator=(const Mystring &rhs){
-  if (this == rhs){
+Mystring &Mystring::operator=(const Mystring &rhs){
+  if (this == &rhs){
     return *this;
   }
   delete [] str;
   str = new char[std::strlen(rhs.str) + 1];
-  str = Mystring{rhs}; //original
+  std::strcpy(str, rhs.str); 
   return *this;
 }
+
+// Move assignment
+Mystring &Mystring::operator=(Mystring &&rhs){
+
+  std::cout << "Using move assignment" << std::endl;
+  if(this == &rhs)
+    return *this;
+  delete [] str;
+  str = rhs.str;
+  rhs.str = nullptr;
+  return *this;
+}
+
+// Display method
+void Mystring::display() const {
+  std::cout << str << " : " << get_length() << std::endl;
+}
+
+// getters
+int Mystring::get_length() const { return std::strlen(str);}
+const char *Mystring::get_str() const { return str;}
