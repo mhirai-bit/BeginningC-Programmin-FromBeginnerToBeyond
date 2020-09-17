@@ -9,9 +9,11 @@ using namespace std;
 int main() {
 
     Mystring larry {"Larry"};
-    larry.display();                                        // Larry
+    larry.display();
+    std::cout << "display finished" << std::endl;                                     // Larry
 
     larry = -larry;
+    std::cout << "negation finished" << std::endl; 
     larry.display();                                        // larry
 
     cout << boolalpha << endl;

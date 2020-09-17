@@ -23,9 +23,16 @@ Mystring::Mystring(const char* s)
 }
 
 // Copy constructor
+// Mystring::Mystring(const Mystring &source)
+//         :str{source.str}{
+//           std::cout << "Copy constructor used" << std::endl;
+// }
 Mystring::Mystring(const Mystring &source)
-        :str{source.str}{
-          std::cout << "Copy constructor used" << std::endl;
+    : str{nullptr} {
+        str = new char[std::strlen(source.str)+ 1];
+        std::strcpy(str, source.str);
+        std::cout << "Copy constructor used" << std::endl;
+
 }
 
 // Move constructor
@@ -80,13 +87,22 @@ bool operator==(const Mystring &lhs, const Mystring &rhs){
 Mystring operator-(const Mystring &obj){
   char *buff = new char[std::strlen(obj.str) + 1];
   std::strcpy(buff, obj.str);
-  for(size_t i=0; 0<std::strlen(buff);i++){
+  for(size_t i=0; i<std::strlen(buff);i++){
     buff[i] = std::tolower(buff[i]);
   }
   Mystring temp {buff};
   delete [] buff;
   return temp;
 }
+// Mystring operator-(const Mystring &obj) {
+//     char *buff = new char[std::strlen(obj.str) + 1];
+//     std::strcpy(buff, obj.str);
+//     for (size_t i=0; i<std::strlen(buff); i++)
+//         buff[i] = std::tolower(buff[i]);
+//     Mystring temp {buff};
+//     delete [] buff;
+//     return temp;
+// }
 
 // Concatenation
 Mystring operator+(const Mystring &lhs, const Mystring &rhs){
