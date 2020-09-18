@@ -6,9 +6,9 @@ class Mystring
 private:
   char *str;
 public:
-  Mystring():
+  Mystring();
   Mystring(const char *s);
-  Mysring(const Mystring &source);
+  Mystring(const Mystring &source);
   ~Mystring();
   void display() const;
   int get_length() const;
