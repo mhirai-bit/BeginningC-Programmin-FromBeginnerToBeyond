@@ -4,7 +4,7 @@
 #include <iostream>
 
 class Account  {
-    friend std::ostream &operator<<(std::ostream &os, const Account &acc);
+    virtual  friend std::ostream &operator<<(std::ostream &os, const Account &acc);
 public:
     virtual void withdraw(double amount) {
         std::cout << "In Account::withdraw" << std::endl;
@@ -18,7 +18,7 @@ std::ostream &operator<<(std::ostream &os, const Account &acc) {
 }
 
 class Checking: public Account  {
-    friend std::ostream &operator<<(std::ostream &os, const Checking &acc);
+    virtual friend std::ostream &operator<<(std::ostream &os, const Checking &acc);
 public:
     virtual void withdraw(double amount) {
         std::cout << "In Checking::withdraw" << std::endl;
